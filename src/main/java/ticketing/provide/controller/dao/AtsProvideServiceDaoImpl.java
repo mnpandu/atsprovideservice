@@ -46,39 +46,12 @@ public class AtsProvideServiceDaoImpl implements AtsProvideServiceDao {
 	@Override
 	public String GetEvDetails(String xid) {
  
-	//	List evlist = new ArrayList();
 		String cannonicalData = "";
 		try {
 			Session session = this.sessionFactory.getCurrentSession();
-			
-		//	String[] a = xid.split(",");
-			
-			/*for(int i=0;i<a.length;i++)
-			{
-				Criteria cr = session.createCriteria(TicketingModel.class);
-				String b =a[i].trim();
-			
-			cr.add(Restrictions.eq("canonnicalId",b));
-			List<TicketingModel> evtModel = cr.list();
-			for (Iterator iterator = evtModel.iterator(); iterator.hasNext();) {
-				TicketingModel ev = (TicketingModel) iterator.next();
-				
-//				FileInputStream fis = new FileInputStream(name);
-//	            String xml = IOUtils.toString(fis); 
-	          //  JSON objJson = new XMLSerializer().read(ev.getCanonnicalData()); 
-	            
-				evlist.add(ev.getCanonnicalData());				
-			}
-			}*/
-			
 			Criteria cr = session.createCriteria(TicketingModel.class);
 			cr.add(Restrictions.eq("canonnicalId",xid));
-			List<TicketingModel> evtModel = cr.list();
-			/*for (Iterator iterator = evtModel.iterator(); iterator.hasNext();) {
-				TicketingModel ev = (TicketingModel) iterator.next();
-				cannonicalData = ev.getCanonnicalData();
-			}*/
-			
+			List<TicketingModel> evtModel = cr.list();		
 			cannonicalData =	evtModel.get(0).getCanonnicalData();
 		} catch (Exception e) {
 			e.printStackTrace();
